@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'screens/auth/login_screen.dart';
+import 'package:recipes_food_share/feature/user/screens/user_home.dart';
+import 'feature/auth/login_screen.dart';
 import 'core/services/auth_service.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class RecipesFoodShare extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginScreen(),
+      home: HomeScreen(),
     );
   }
 }

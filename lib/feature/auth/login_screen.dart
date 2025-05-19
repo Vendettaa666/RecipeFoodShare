@@ -3,8 +3,8 @@ import '../../core/services/auth_service.dart';
 import '../../widgets/custom_textfield.dart';
 import '../../widgets/custom_button.dart';
 import '../admin/admin_home.dart';
-import '../user/user_home.dart';
-import '../auth/register_screen.dart';
+import '../user/screens/user_home.dart';
+import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (user != null) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (_) => user.role == 'admin' ? const AdminHome() : const UserHome(),
+          builder: (_) => user.role == 'admin' ? const AdminHome() : const HomeScreen(),
         ),
       );
     } else {
