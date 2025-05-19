@@ -7,6 +7,8 @@ import '../user/user_home.dart';
 import '../auth/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -17,6 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
   final _authService = AuthService();
   bool _isLoading = false;
+  bool _obscurePassword = true;
 
   Future<void> _login() async {
     if (!_formKey.currentState!.validate()) return;
@@ -33,62 +36,203 @@ class _LoginScreenState extends State<LoginScreen> {
     if (user != null) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (_) => user.role == 'admin' ? AdminHome() : UserHome(),
+          builder: (_) => user.role == 'admin' ? const AdminHome() : const UserHome(),
         ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Login failed. Invalid credentials')),
+        const SnackBar(content: Text('Login failed. Invalid credentials')),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Login',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 32),
-              CustomTextField(
-                controller: _emailController,
-                label: 'Email',
-                validator: (value) =>
-                    value!.isEmpty ? 'Please enter email' : null,
-              ),
-              SizedBox(height: 16),
-              CustomTextField(
-                controller: _passwordController,
-                label: 'Password',
-                obscureText: true,
-                validator: (value) =>
-                    value!.isEmpty ? 'Please enter password' : null,
-              ),
-              SizedBox(height: 24),
-              CustomButton(
-                text: 'Login',
-                onPressed: _isLoading ? null : _login,
-                isLoading: _isLoading,
-              ),
-              SizedBox(height: 16),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => RegisterScreen()),
-                  );
-                },
-                child: Text('Don\'t have an account? Register'),
-              ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.blue.shade900,
+              Colors.blue.shade700,
             ],
+          ),
+        ),
+        child: SafeArea(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: constraints.maxHeight,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: screenSize.width * 0.08,
+                      vertical: screenSize.height * 0.04,
+                    ),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(height: screenSize.height * 0.04),
+                          Text(
+                            'Welcome Back',
+                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: screenSize.width * 0.06,
+                                ),
+                          ),
+                          SizedBox(height: screenSize.height * 0.01),
+                          Text(
+                            'Please sign in to continue',
+                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                  color: Colors.white.withOpacity(0.9),
+                                  fontSize: screenSize.width * 0.035,
+                                ),
+                          ),
+                          SizedBox(height: screenSize.height * 0.06),
+                          Container(
+                            constraints: BoxConstraints(
+                              maxWidth: 500,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(screenSize.width * 0.05),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 20,
+                                  offset: const Offset(0, 10),
+                                ),
+                              ],
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(screenSize.width * 0.06),
+                              child: Column(
+                                children: [
+                                  CustomTextField(
+                                    controller: _emailController,
+                                    label: 'Email Address',
+                                    hintText: 'Enter your email',
+                                    prefixIcon: const Icon(Icons.email_outlined),
+                                    keyboardType: TextInputType.emailAddress,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter your email';
+                                      }
+                                      if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                                          .hasMatch(value)) {
+                                        return 'Please enter a valid email';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  SizedBox(height: screenSize.height * 0.025),
+                                  CustomTextField(
+                                    controller: _passwordController,
+                                    label: 'Password',
+                                    hintText: 'Enter your password',
+                                    prefixIcon: const Icon(Icons.lock_outline),
+                                    obscureText: _obscurePassword,
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        _obscurePassword
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          _obscurePassword = !_obscurePassword;
+                                        });
+                                      },
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter your password';
+                                      }
+                                      if (value.length < 6) {
+                                        return 'Password must be at least 6 characters';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  SizedBox(height: screenSize.height * 0.01),
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: TextButton(
+                                      onPressed: () {
+                                        // Add forgot password functionality
+                                      },
+                                      child: Text(
+                                        'Forgot Password?',
+                                        style: TextStyle(
+                                          color: Colors.blue.shade700,
+                                          fontSize: screenSize.width * 0.035,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: screenSize.height * 0.03),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: CustomButton(
+                                      text: 'Sign In',
+                                      onPressed: _isLoading ? null : _login,
+                                      isLoading: _isLoading,
+                                      backgroundColor: Colors.blue.shade700,
+                                      foregroundColor: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: screenSize.height * 0.04),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Don\'t have an account? ',
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.9),
+                                  fontSize: screenSize.width * 0.035,
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => const RegisterScreen(),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  'Sign Up',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: screenSize.width * 0.035,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
         ),
       ),

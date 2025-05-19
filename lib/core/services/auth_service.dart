@@ -1,13 +1,19 @@
 import '../../models/user_model.dart';
 
 class AuthService {
-  // Daftar user dengan satu admin default
+  // Daftar user dengan satu admin default dan satu user contoh
   final List<User> _users = [
     User(
       id: '1',
       name: 'Admin',
       email: 'admin@example.com',
       role: 'admin',
+    ),
+    User(
+      id: '2',
+      name: 'John Doe',
+      email: 'user@example.com',
+      role: 'user',
     ),
   ];
 
@@ -26,7 +32,8 @@ class AuthService {
       );
       
       // Password sederhana untuk demo (dalam real app, gunakan hashing)
-      if (password == 'admin123') {
+      String correctPassword = user.role == 'admin' ? 'admin123' : 'user123';
+      if (password == correctPassword) {
         _currentUser = user;
         return user;
       }
@@ -73,5 +80,10 @@ class AuthService {
   // Method untuk mengecek apakah user adalah admin
   bool isAdmin() {
     return _currentUser?.role == 'admin';
+  }
+  
+  // Method untuk mengecek apakah user adalah user biasa
+  bool isUser() {
+    return _currentUser?.role == 'user';
   }
 }

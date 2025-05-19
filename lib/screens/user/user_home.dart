@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../../core/services/auth_service.dart';
 
 class UserHome extends StatelessWidget {
+  const UserHome({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

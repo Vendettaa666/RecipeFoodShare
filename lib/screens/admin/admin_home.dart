@@ -5,6 +5,8 @@ import 'settings.dart';
 import '../../core/services/auth_service.dart';
 
 class AdminHome extends StatefulWidget {
+  const AdminHome({super.key});
+
   @override
   _AdminHomeState createState() => _AdminHomeState();
 }
