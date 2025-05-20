@@ -65,8 +65,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Colors.blue.shade900,
-              Colors.blue.shade700,
+              Colors.white,
+              Colors.orange.shade50,
             ],
           ),
         ),
@@ -91,7 +91,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: Text(
                             'Create Account',
                             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                  color: Colors.white,
+                                  color: Color(0xFFFF8C00),
                                   fontWeight: FontWeight.bold,
                                 ),
                           ),
@@ -102,7 +102,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: Text(
                             'Fill in your details to get started',
                             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                  color: Colors.white.withOpacity(0.9),
+                                  color: Color(0xFFFF8C00).withOpacity(0.9),
                                 ),
                           ),
                         ),
@@ -127,7 +127,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   controller: _nameController,
                                   label: 'Full Name',
                                   hintText: 'Enter your full name',
-                                  prefixIcon: const Icon(Icons.person_outline),
+                                  prefixIcon: Icon(Icons.person_outline, color: Color(0xFFFF8C00)),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter your name';
@@ -140,7 +140,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   controller: _emailController,
                                   label: 'Email Address',
                                   hintText: 'Enter your email',
-                                  prefixIcon: const Icon(Icons.email_outlined),
+                                  prefixIcon: Icon(Icons.email_outlined, color: Color(0xFFFF8C00)),
                                   keyboardType: TextInputType.emailAddress,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
@@ -158,14 +158,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   controller: _passwordController,
                                   label: 'Password',
                                   hintText: 'Enter your password',
-                                  prefixIcon: const Icon(Icons.lock_outline),
+                                  prefixIcon: Icon(Icons.lock_outline, color: Color(0xFFFF8C00)),
                                   obscureText: _obscurePassword,
                                   suffixIcon: IconButton(
                                     icon: Icon(
                                       _obscurePassword
                                           ? Icons.visibility_off
                                           : Icons.visibility,
-                                      color: Colors.grey,
+                                      color: Color(0xFFFF8C00),
                                     ),
                                     onPressed: () {
                                       setState(() {
@@ -188,14 +188,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   controller: _confirmPasswordController,
                                   label: 'Confirm Password',
                                   hintText: 'Re-enter your password',
-                                  prefixIcon: const Icon(Icons.lock_outline),
+                                  prefixIcon: Icon(Icons.lock_outline, color: Color(0xFFFF8C00)),
                                   obscureText: _obscureConfirmPassword,
                                   suffixIcon: IconButton(
                                     icon: Icon(
                                       _obscureConfirmPassword
                                           ? Icons.visibility_off
                                           : Icons.visibility,
-                                      color: Colors.grey,
+                                      color: Color(0xFFFF8C00),
                                     ),
                                     onPressed: () {
                                       setState(() {
@@ -220,7 +220,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     text: 'Sign Up',
                                     onPressed: _isLoading ? null : _register,
                                     isLoading: _isLoading,
-                                    backgroundColor: Colors.blue.shade700,
+                                    backgroundColor: Color(0xFFFF8C00),
                                     foregroundColor: Colors.white,
                                   ),
                                 ),
@@ -235,7 +235,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             Text(
                               'Already have an account? ',
                               style: TextStyle(
-                                color: Colors.white.withOpacity(0.9),
+                                color: Color(0xFFFF8C00).withOpacity(0.9),
                               ),
                             ),
                             TextButton(
@@ -247,10 +247,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                 );
                               },
-                              child: const Text(
+                              child: Text(
                                 'Sign In',
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: Color(0xFFFF8C00),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),

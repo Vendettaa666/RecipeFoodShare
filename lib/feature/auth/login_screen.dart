@@ -57,8 +57,8 @@ class _LoginScreenState extends State<LoginScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Colors.blue.shade900,
-              Colors.blue.shade700,
+              Colors.white,
+              Colors.orange.shade50,
             ],
           ),
         ),
@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Text(
                             'Welcome Back',
                             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                  color: Colors.white,
+                                  color: Colors.orange.shade800,
                                   fontWeight: FontWeight.bold,
                                   fontSize: screenSize.width * 0.06,
                                 ),
@@ -93,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Text(
                             'Please sign in to continue',
                             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                  color: Colors.white.withOpacity(0.9),
+                                  color: Colors.grey.shade700,
                                   fontSize: screenSize.width * 0.035,
                                 ),
                           ),
@@ -107,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               borderRadius: BorderRadius.circular(screenSize.width * 0.05),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
+                                  color: Colors.orange.withOpacity(0.1),
                                   blurRadius: 20,
                                   offset: const Offset(0, 10),
                                 ),
@@ -121,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     controller: _emailController,
                                     label: 'Email Address',
                                     hintText: 'Enter your email',
-                                    prefixIcon: const Icon(Icons.email_outlined),
+                                    prefixIcon: Icon(Icons.email_outlined, color: Colors.orange.shade800),
                                     keyboardType: TextInputType.emailAddress,
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
@@ -139,14 +139,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                     controller: _passwordController,
                                     label: 'Password',
                                     hintText: 'Enter your password',
-                                    prefixIcon: const Icon(Icons.lock_outline),
+                                    prefixIcon: Icon(Icons.lock_outline, color: Colors.orange.shade800),
                                     obscureText: _obscurePassword,
                                     suffixIcon: IconButton(
                                       icon: Icon(
                                         _obscurePassword
                                             ? Icons.visibility_off
                                             : Icons.visibility,
-                                        color: Colors.grey,
+                                        color: Colors.orange.shade800,
                                       ),
                                       onPressed: () {
                                         setState(() {
@@ -174,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       child: Text(
                                         'Forgot Password?',
                                         style: TextStyle(
-                                          color: Colors.blue.shade700,
+                                          color: Colors.orange.shade800,
                                           fontSize: screenSize.width * 0.035,
                                         ),
                                       ),
@@ -187,7 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       text: 'Sign In',
                                       onPressed: _isLoading ? null : _login,
                                       isLoading: _isLoading,
-                                      backgroundColor: Colors.blue.shade700,
+                                      backgroundColor: Colors.orange.shade800,
                                       foregroundColor: Colors.white,
                                     ),
                                   ),
@@ -202,7 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Text(
                                 'Don\'t have an account? ',
                                 style: TextStyle(
-                                  color: Colors.white.withOpacity(0.9),
+                                  color: Colors.grey.shade700,
                                   fontSize: screenSize.width * 0.035,
                                 ),
                               ),
@@ -218,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: Text(
                                   'Sign Up',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.orange.shade800,
                                     fontWeight: FontWeight.bold,
                                     fontSize: screenSize.width * 0.035,
                                   ),

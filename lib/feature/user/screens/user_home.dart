@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../models/recipe.dart';
 import '../../../core/services/recipe_service.dart';
 import '../widgets/user_greeting.dart';
+
 import '../widgets/search_bar.dart' as custom_search;
 import '../widgets/category_list.dart';
 import '../widgets/section_header.dart';
@@ -53,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cookify',
+        title: const Text('Recipe Food Share',
             style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
@@ -79,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 20),
               const UserGreeting(),
               const SizedBox(height: 25),
+
               const custom_search.SearchBar(),
               const SizedBox(height: 35),
               CategoryList(

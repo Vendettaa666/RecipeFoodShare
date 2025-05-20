@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:recipes_food_share/feature/user/screens/search_screen.dart';
+import '../screens/user_home.dart';
+import '../screens/add_recipe_screen.dart';
+
 
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({super.key});
@@ -19,27 +23,52 @@ class CustomBottomNavBar extends StatelessWidget {
             IconButton(
               icon:
                   const Icon(Icons.home_filled, color: Colors.orange, size: 28),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                );
+              },
             ),
             IconButton(
               icon: Icon(Icons.search,
                   color: Colors.orange.withOpacity(0.5), size: 28),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SearchScreen()),
+                );
+              },
             ),
             FloatingActionButton(
               backgroundColor: Colors.orange,
               child: const Icon(Icons.add, color: Colors.white),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AddRecipeScreen()),
+                );
+              },
             ),
             IconButton(
               icon: Icon(Icons.bookmark_border,
                   color: Colors.orange.withOpacity(0.5), size: 28),
-              onPressed: () {},
+              onPressed: () {
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => const BookmarkPage()),
+                // );
+              },
             ),
             IconButton(
               icon: Icon(Icons.person_outline,
                   color: Colors.orange.withOpacity(0.5), size: 28),
-              onPressed: () {},
+              onPressed: () {
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => const ProfilePage()),
+                // );
+              },
             ),
           ],
         ),
