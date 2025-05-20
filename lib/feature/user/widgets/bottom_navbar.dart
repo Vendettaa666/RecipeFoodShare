@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipes_food_share/feature/user/screens/search_screen.dart';
+import 'package:recipes_food_share/feature/user/screens/profile_screen.dart';
 import '../screens/user_home.dart';
 import '../screens/add_recipe_screen.dart';
 
@@ -64,10 +65,10 @@ class CustomBottomNavBar extends StatelessWidget {
               icon: Icon(Icons.person_outline,
                   color: Colors.orange.withOpacity(0.5), size: 28),
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => const ProfilePage()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ProfileScreen()),
+                );
               },
             ),
           ],

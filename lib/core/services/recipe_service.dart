@@ -5,7 +5,7 @@ class RecipeService {
     return [
       Recipe(
         title: 'Lalapan Ayam Goreng',
-        chef: 'Mbak Yuni',
+        username: 'Mr. Smith',
         time: '30 min',
         rating: '4.8',
         image: 'images/lalapan.jpg',
@@ -33,7 +33,7 @@ class RecipeService {
       ),
       Recipe(
         title: 'Soto Ayam',
-        chef: 'Bu Siti',
+        username: 'Ciyara',
         time: '45 min',
         rating: '4.5',
         image: 'images/soto.jpg',
@@ -61,7 +61,7 @@ class RecipeService {
       ),
       Recipe(
         title: 'Steak Daging Sapi',
-        chef: 'Chef Juna',
+        username: 'Leo Satria',
         time: '25 min',
         rating: '4.9',
         image: 'images/steak.jpg',
@@ -89,7 +89,7 @@ class RecipeService {
       ),
       Recipe(
         title: 'Pancakes',
-        chef: 'Chef Arnold',
+        username: 'Vinn Arnold',
         time: '20 min',
         rating: '4.7',
         image: 'images/steak.jpg',

@@ -1,49 +1,14 @@
 import 'package:flutter/material.dart';
 import '../../../models/recipe.dart';
 
-class RecipeCardList extends StatelessWidget {
-  final List<Recipe> recipes;
-  final Function(Recipe) onRecipeTap;
-
-  const RecipeCardList({
-    super.key,
-    required this.recipes,
-    required this.onRecipeTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    if (recipes.isEmpty) {
-      return const Center(
-        child: Text('No recipes found'),
-      );
-    }
-
-    return SizedBox(
-      height: 220,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: recipes.length,
-        itemBuilder: (context, index) {
-          final recipe = recipes[index];
-          return RecipeCard(
-            recipe: recipe,
-            onTap: () => onRecipeTap(recipe),
-          );
-        },
-      ),
-    );
-  }
-}
-
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const RecipeCard({
     super.key,
     required this.recipe,
-    required this.onTap,
+    this.onTap,
   });
 
   @override
@@ -93,7 +58,7 @@ class RecipeCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'by ${recipe.chef}',
+                    '${recipe.username}',
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey[600],
@@ -126,38 +91,6 @@ class RecipeCard extends StatelessWidget {
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                               color: Colors.orange,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(Icons.favorite, size: 18, color: Colors.red[400]),
-                          const SizedBox(width: 6),
-                          Text(
-                            '10',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey[500],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Icon(Icons.comment, size: 18, color: Colors.blue[400]),
-                          const SizedBox(width: 6),
-                          Text(
-                            '5',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey[500],
                             ),
                           ),
                         ],

@@ -201,12 +201,12 @@ class RecipeDetailScreen extends StatelessWidget {
         ),
         child: FloatingActionButton.extended(
           onPressed: () {
-            // Aksi untuk memulai memasak
+            // Aksi untuk melihat komentar
           },
           backgroundColor: Colors.orange,
-          icon: const Icon(Icons.restaurant_menu_outlined, color: Colors.white),
+          icon: const Icon(Icons.comment_outlined, color: Colors.white),
           label: const Text(
-            'Mulai Memasak',
+            'Lihat Komentar',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),

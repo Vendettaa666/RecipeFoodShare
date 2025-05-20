@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:recipes_food_share/feature/auth/login_screen.dart';
 import 'package:recipes_food_share/feature/user/screens/user_home.dart';
-import 'package:recipes_food_share/models/user_model.dart';
+import 'feature/auth/login_screen.dart';
+import 'core/services/auth_service.dart';
 
 void main() {
   runApp(RecipesFoodShare());
@@ -13,13 +13,13 @@ class RecipesFoodShare extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-    title: 'Recipes Food Share',
+      title: 'Flutter Login Roles',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginScreen(),
+      home: HomeScreen(),
     );
   }
 }

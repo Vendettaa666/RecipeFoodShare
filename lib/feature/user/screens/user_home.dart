@@ -81,7 +81,12 @@ class _HomeScreenState extends State<HomeScreen> {
               const UserGreeting(),
               const SizedBox(height: 25),
 
-              const custom_search.SearchBar(),
+              custom_search.SearchBar(
+                hintText: 'Search recipes...',
+                onChanged: (value) {
+                  // Handle Asearch
+                },
+              ),
               const SizedBox(height: 35),
               CategoryList(
                 onCategorySelected: _filterByCategory,
@@ -123,7 +128,6 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: const CustomBottomNavBar(),
     );
   }
-
   List<Widget> _buildRecipeSections() {
     if (_displayedRecipes.isEmpty) {
       return [

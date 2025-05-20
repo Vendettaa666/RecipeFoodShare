@@ -1,6 +1,6 @@
 class Recipe {
   final String title;
-  final String chef;
+  final String username;
   final String time;
   final String rating;
   final String image;
@@ -10,7 +10,7 @@ class Recipe {
 
   Recipe({
     required this.title,
-    required this.chef,
+    required this.username,
     required this.time,
     required this.rating,
     required this.image,
