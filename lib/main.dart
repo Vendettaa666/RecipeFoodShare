@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:recipes_food_share/feature/auth/login_screen.dart';
 import 'package:recipes_food_share/feature/user/screens/user_home.dart';
-import 'feature/auth/login_screen.dart';
-import 'core/services/auth_service.dart';
+import 'package:recipes_food_share/models/user_model.dart';
 
 void main() {
   runApp(RecipesFoodShare());

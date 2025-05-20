@@ -6,95 +6,70 @@ class UserGreeting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.orange[200]!, Colors.orange[100]!],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(20),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(25),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
-            spreadRadius: 2,
-            blurRadius: 8,
+            color: Colors.grey.withOpacity(0.08),
+            spreadRadius: 5,
+            blurRadius: 15,
             offset: const Offset(0, 3),
           ),
         ],
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: Colors.white, width: 3),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
-                  spreadRadius: 2,
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-              image: const DecorationImage(
-                image: NetworkImage(
-                    'https://randomuser.me/api/portraits/women/44.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          const SizedBox(width: 20),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                width: 65,
+                height: 65,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Text(
-                  'Good Morning',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.orange[900],
-                    letterSpacing: 0.5,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.orange, width: 2.5),
+                  image: const DecorationImage(
+                    image: AssetImage('th.jpg'),
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
-              const SizedBox(height: 8),
-              const Text(
-                'User Name',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1,
-                  color: Colors.white,
-                  shadows: [
-                    Shadow(
-                      offset: Offset(1, 1),
-                      blurRadius: 2,
-                      color: Color.fromRGBO(0, 0, 0, 0.2),
+              const SizedBox(width: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Welcome back!',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey[600],
+                      fontWeight: FontWeight.w500,
                     ),
-                  ],
-                ),
+                  ),
+                  const Text(
+                    'Username',
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.orange,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-          const Spacer(),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.notifications_outlined,
-              color: Colors.orange[800],
-              size: 28,
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.orange.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(18),
             ),
-            style: IconButton.styleFrom(
-              backgroundColor: Colors.white.withOpacity(0.3),
-              padding: const EdgeInsets.all(8),
+            child: const Icon(
+              Icons.notifications_none,
+              color: Colors.orange,
+              size: 28,
             ),
           ),
         ],
