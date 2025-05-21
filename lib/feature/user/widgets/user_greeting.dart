@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipes_food_share/feature/user/screens/notification%20_screen.dart';
 
 class UserGreeting extends StatelessWidget {
   const UserGreeting({super.key});
@@ -62,7 +63,10 @@ class UserGreeting extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, '/notification_screen');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const NotificationScreen()),
+              );
             },
             child: Container(
               padding: const EdgeInsets.all(12),

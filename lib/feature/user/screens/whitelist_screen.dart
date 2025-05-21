@@ -16,7 +16,7 @@ class WhitelistScreen extends StatelessWidget {
           },
         ),
         title: const Text(
-          'Search Recipes',
+          'Whitelist',
           style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
