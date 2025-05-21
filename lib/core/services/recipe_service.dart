@@ -92,7 +92,7 @@ class RecipeService {
         username: 'Vinn Arnold',
         time: '20 min',
         rating: '4.7',
-        image: 'images/steak.jpg',
+        image: 'images/pancake.jpg',
         category: 'Breakfast',
         ingredients: [
           '200g tepung terigu',
@@ -110,6 +110,189 @@ class RecipeService {
           'Tuang adonan dan masak hingga muncul gelembung',
           'Balik dan masak sisi lainnya',
           'Sajikan dengan madu dan buah-buahan'
+        ],
+      ),
+      Recipe(
+        title: 'Es Jeruk',
+        username: 'Diana',
+        time: '5 min',
+        rating: '4.6',
+        image: 'images/esjeruk.jpg',
+        category: 'Beverages',
+        ingredients: [
+          '3 buah jeruk',
+          'Es batu',
+          'Gula pasir',
+          'Air mineral'
+        ],
+        steps: [
+          'Peras jeruk dan saring',
+          'Tambahkan gula sesuai selera',
+          'Tambahkan air mineral',
+          'Masukkan es batu',
+          'Aduk rata dan sajikan'
+        ],
+      ),
+      Recipe(
+        title: 'Es Cincau',
+        username: 'Rara',
+        time: '15 min',
+        rating: '4.5',
+        image: 'images/escincau.jpg',
+        category: 'Beverages',
+        ingredients: [
+          'Cincau hitam',
+          'Santan',
+          'Gula merah',
+          'Es batu',
+          'Sirup cocopandan'
+        ],
+        steps: [
+          'Potong cincau sesuai selera',
+          'Siapkan santan encer',
+          'Larutkan gula merah',
+          'Susun cincau dalam gelas',
+          'Tambahkan santan dan sirup',
+          'Tambahkan es batu'
+        ],
+      ),
+      Recipe(
+        title: 'Bolu',
+        username: 'Sarah',
+        time: '45 min',
+        rating: '4.8',
+        image: 'images/bolu.jpeg',
+        category: 'Cake',
+        ingredients: [
+          '4 butir telur',
+          '150g tepung terigu',
+          '150g gula pasir',
+          '100g mentega',
+          'Vanili',
+          'SP'
+        ],
+        steps: [
+          'Kocok telur, gula, dan SP sampai mengembang',
+          'Tambahkan tepung terigu',
+          'Masukkan mentega cair',
+          'Tuang ke loyang',
+          'Panggang selama 35 menit',
+          'Dinginkan dan sajikan'
+        ],
+      ),
+      Recipe(
+        title: 'Mie Pedas',
+        username: 'Kevin',
+        time: '15 min',
+        rating: '4.7',
+        image: 'images/miepedas.jpg',
+        category: 'Indonesian',
+        ingredients: [
+          'Mie instant',
+          'Cabe rawit',
+          'Telur',
+          'Sawi',
+          'Bawang goreng'
+        ],
+        steps: [
+          'Rebus mie hingga matang',
+          'Tumis bumbu dan cabe',
+          'Masak telur setengah matang',
+          'Campurkan mie dengan bumbu',
+          'Tambahkan sayuran dan telur',
+          'Taburi bawang goreng'
+        ],
+      ),
+      Recipe(
+        title: 'Pisang Coklat',
+        username: 'Linda',
+        time: '20 min',
+        rating: '4.6',
+        image: 'images/pisangcoklat.jpeg',
+        category: 'Snacks',
+        ingredients: [
+          'Pisang kepok',
+          'Coklat batang',
+          'Tepung terigu',
+          'Gula',
+          'Minyak goreng'
+        ],
+        steps: [
+          'Kupas dan potong pisang',
+          'Buat adonan tepung',
+          'Balut pisang dengan adonan',
+          'Goreng hingga keemasan',
+          'Lelehkan coklat',
+          'Siram pisang dengan coklat'
+        ],
+      ),
+      Recipe(
+        title: 'Es Matcha',
+        username: 'Yuki',
+        time: '10 min',
+        rating: '4.8',
+        image: 'images/esmatcha.jpeg',
+        category: 'Beverages',
+        ingredients: [
+          'Bubuk matcha',
+          'Susu',
+          'Es batu',
+          'Gula',
+          'Air panas'
+        ],
+        steps: [
+          'Seduh matcha dengan air panas',
+          'Tambahkan gula',
+          'Tuang susu',
+          'Tambahkan es batu',
+          'Aduk rata dan sajikan'
+        ],
+      ),
+      Recipe(
+        title: 'Cireng',
+        username: 'Asep',
+        time: '30 min',
+        rating: '4.5',
+        image: 'images/cireng.jpeg',
+        category: 'Snacks',
+        ingredients: [
+          'Tepung kanji',
+          'Tepung terigu',
+          'Bawang putih',
+          'Daun bawang',
+          'Garam',
+          'Air panas'
+        ],
+        steps: [
+          'Campur semua bahan kering',
+          'Tambahkan air panas sedikit demi sedikit',
+          'Bentuk adonan',
+          'Goreng hingga crispy',
+          'Sajikan dengan sambal'
+        ],
+      ),
+      Recipe(
+        title: 'Daging Rendang',
+        username: 'Minang Chef',
+        time: '180 min',
+        rating: '4.9',
+        image: 'images/daging.jpg',
+        category: 'Indonesian',
+        ingredients: [
+          'Daging sapi',
+          'Santan',
+          'Bumbu rendang',
+          'Daun jeruk',
+          'Serai',
+          'Lengkuas'
+        ],
+        steps: [
+          'Tumis bumbu hingga harum',
+          'Masukkan daging',
+          'Tambahkan santan',
+          'Masak dengan api kecil',
+          'Aduk sesekali hingga mengering',
+          'Sajikan'
         ],
       ),
     ];

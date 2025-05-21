@@ -54,13 +54,18 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.orange),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: const Text(
           'Search Recipes',
           style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.orange),
         ),
         centerTitle: true,
         backgroundColor: Colors.white,
@@ -127,30 +132,35 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 )
               else
-                GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 15,
-                    mainAxisSpacing: 15,
-                    childAspectRatio: 0.75,
-                  ),
-                  itemCount: _filteredRecipes.length,
-                  itemBuilder: (context, index) {
-                    final recipe = _filteredRecipes[index];
-                    return RecipeCard(
-                      recipe: recipe,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => RecipeDetailScreen(recipe: recipe),
-                          ),
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    return GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 15,
+                        mainAxisSpacing: 15,
+                        childAspectRatio: constraints.maxWidth > 600 ? 0.85 : 0.75,
+                        mainAxisExtent: 285,
+                      ),
+                      itemCount: _filteredRecipes.length,
+                      itemBuilder: (context, index) {
+                        final recipe = _filteredRecipes[index];
+                        return RecipeCard(
+                          recipe: recipe,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => RecipeDetailScreen(recipe: recipe),
+                              ),
+                            );
+                          },
                         );
                       },
                     );
-                  },
+                  }
                 ),
               const SizedBox(height: 30),
             ],

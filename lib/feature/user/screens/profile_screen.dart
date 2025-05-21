@@ -8,20 +8,25 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.orange),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: const Text(
           'My Profile',
           style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.orange),
         ),
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings, color: Colors.grey),
+            icon: const Icon(Icons.settings, color: Colors.orange),
             onPressed: () {
               // Navigate to settings
             },
@@ -58,13 +63,11 @@ class ProfileScreen extends StatelessWidget {
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.orange, width: 3),
                         image: const DecorationImage(
-                          image: NetworkImage(
-                              'https://randomuser.me/api/portraits/women/44.jpg'),
+                          image: AssetImage('th.jpg'),
                           fit: BoxFit.cover,
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 20),
+                    ),                    const SizedBox(height: 20),
                     const Text(
                       'Anisa Rahman',
                       style: TextStyle(

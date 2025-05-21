@@ -53,7 +53,7 @@ class UserGreeting extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
-                      color: Colors.orange,
+                      color: Colors.black,
                     ),
                   ),
                 ],

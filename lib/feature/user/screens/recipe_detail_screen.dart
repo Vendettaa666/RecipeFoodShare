@@ -13,13 +13,11 @@ class RecipeDetailScreen extends StatelessWidget {
         slivers: [
           SliverAppBar(
             expandedHeight: 350,
-            leading: Container(
-              margin: const EdgeInsets.only(left: 10),
-              
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back, color: Colors.white),
-                onPressed: () => Navigator.pop(context),
-              ),
+            leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.orange),
+            onPressed: () {
+            Navigator.pop(context);
+          },
             ),
             flexibleSpace: FlexibleSpaceBar(
               title: Text(

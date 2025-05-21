@@ -31,12 +31,17 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.orange),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: const Text('Add New Recipe',
           style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          )
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.orange),
         ),
         centerTitle: true,
         backgroundColor: Colors.white,
@@ -148,7 +153,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
               Slider(
                 value: _cookingTime.toDouble(),
                 min: 5,
-                max: 180,
+                max: 210,
                 divisions: 35,
                 label: _cookingTime.toString(),
                 onChanged: (value) {
