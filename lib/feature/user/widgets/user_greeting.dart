@@ -60,16 +60,21 @@ class UserGreeting extends StatelessWidget {
               ),
             ],
           ),
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.orange.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(18),
-            ),
-            child: const Icon(
-              Icons.notifications_none,
-              color: Colors.orange,
-              size: 28,
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/notification_screen');
+            },
+            child: Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.orange.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: const Icon(
+                Icons.notifications_none,
+                color: Colors.orange,
+                size: 28,
+              ),
             ),
           ),
         ],

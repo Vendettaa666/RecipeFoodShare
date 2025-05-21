@@ -7,6 +7,8 @@ class Recipe {
   final String category;
   final List<String> ingredients;
   final List<String> steps;
+  final int like;
+  final int comment;
 
   Recipe({
     required this.title,
@@ -17,5 +19,7 @@ class Recipe {
     required this.category,
     required this.ingredients,
     required this.steps,
+    required this.like,
+    required this.comment,
   });
 }

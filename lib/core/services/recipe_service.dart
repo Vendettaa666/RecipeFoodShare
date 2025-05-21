@@ -10,6 +10,8 @@ class RecipeService {
         rating: '4.8',
         image: 'images/lalapan.jpg',
         category: 'Indonesian',
+        like: 150,
+        comment: 25,
         ingredients: [
           '1 ekor ayam potong',
           'Kubis',
@@ -38,6 +40,8 @@ class RecipeService {
         rating: '4.5',
         image: 'images/soto.jpg',
         category: 'Indonesian',
+        like: 120,
+        comment: 18,
         ingredients: [
           '1 ekor ayam',
           'Bihun',
@@ -66,6 +70,8 @@ class RecipeService {
         rating: '4.9',
         image: 'images/steak.jpg',
         category: 'Western',
+        like: 200,
+        comment: 45,
         ingredients: [
           '200g daging sapi has dalam',
           'Kentang',
@@ -94,6 +100,8 @@ class RecipeService {
         rating: '4.7',
         image: 'images/pancake.jpg',
         category: 'Breakfast',
+        like: 180,
+        comment: 32,
         ingredients: [
           '200g tepung terigu',
           '2 butir telur',
@@ -119,6 +127,8 @@ class RecipeService {
         rating: '4.6',
         image: 'images/esjeruk.jpg',
         category: 'Beverages',
+        like: 90,
+        comment: 15,
         ingredients: [
           '3 buah jeruk',
           'Es batu',
@@ -140,6 +150,8 @@ class RecipeService {
         rating: '4.5',
         image: 'images/escincau.jpg',
         category: 'Beverages',
+        like: 85,
+        comment: 12,
         ingredients: [
           'Cincau hitam',
           'Santan',
@@ -163,6 +175,8 @@ class RecipeService {
         rating: '4.8',
         image: 'images/bolu.jpeg',
         category: 'Cake',
+        like: 165,
+        comment: 28,
         ingredients: [
           '4 butir telur',
           '150g tepung terigu',
@@ -187,6 +201,8 @@ class RecipeService {
         rating: '4.7',
         image: 'images/miepedas.jpg',
         category: 'Indonesian',
+        like: 175,
+        comment: 30,
         ingredients: [
           'Mie instant',
           'Cabe rawit',
@@ -210,6 +226,8 @@ class RecipeService {
         rating: '4.6',
         image: 'images/pisangcoklat.jpeg',
         category: 'Snacks',
+        like: 145,
+        comment: 22,
         ingredients: [
           'Pisang kepok',
           'Coklat batang',
@@ -233,6 +251,8 @@ class RecipeService {
         rating: '4.8',
         image: 'images/esmatcha.jpeg',
         category: 'Beverages',
+        like: 160,
+        comment: 27,
         ingredients: [
           'Bubuk matcha',
           'Susu',
@@ -255,6 +275,8 @@ class RecipeService {
         rating: '4.5',
         image: 'images/cireng.jpeg',
         category: 'Snacks',
+        like: 130,
+        comment: 20,
         ingredients: [
           'Tepung kanji',
           'Tepung terigu',
@@ -278,6 +300,8 @@ class RecipeService {
         rating: '4.9',
         image: 'images/daging.jpg',
         category: 'Indonesian',
+        like: 250,
+        comment: 55,
         ingredients: [
           'Daging sapi',
           'Santan',

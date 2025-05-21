@@ -71,100 +71,108 @@ class _SearchScreenState extends State<SearchScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-              custom_search.SearchBar(
-                onChanged: _searchRecipes,
-                hintText: 'Search recipes, chefs, or categories...',
-              ),
-              const SizedBox(height: 25),
-              // Category Chips
-              SizedBox(
-                height: 50,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: _categories.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: FilterChip(
-                        label: Text(_categories[index]),
-                        selected: false,
-                        onSelected: (_) => _filterByCategory(_categories[index]),
-                        backgroundColor: Colors.white,
-                        selectedColor: Colors.orange.withOpacity(0.2),
-                        labelStyle: TextStyle(
-                          color: Colors.grey[800],
-                          fontWeight: FontWeight.w500,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          side: BorderSide(
-                            color: Colors.grey[300]!,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(height: 25),
-              if (_filteredRecipes.isEmpty)
-                const Center(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(Icons.search_off, size: 60, color: Colors.grey),
-                      SizedBox(height: 15),
-                      Text(
-                        'No recipes found',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.grey,
-                        ),
+                      const SizedBox(height: 20),
+                      custom_search.SearchBar(
+                        onChanged: _searchRecipes,
+                        hintText: 'Search recipes, chefs, or categories...',
                       ),
-                    ],
-                  ),
-                )
-              else
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    return GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 15,
-                        mainAxisSpacing: 15,
-                        childAspectRatio: constraints.maxWidth > 600 ? 0.85 : 0.75,
-                        mainAxisExtent: 285,
-                      ),
-                      itemCount: _filteredRecipes.length,
-                      itemBuilder: (context, index) {
-                        final recipe = _filteredRecipes[index];
-                        return RecipeCard(
-                          recipe: recipe,
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => RecipeDetailScreen(recipe: recipe),
+                      const SizedBox(height: 25),
+                      // Category Chips
+                      SizedBox(
+                        height: 50,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _categories.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: FilterChip(
+                                label: Text(_categories[index]),
+                                selected: false,
+                                onSelected: (_) => _filterByCategory(_categories[index]),
+                                backgroundColor: Colors.white,
+                                selectedColor: Colors.orange.withOpacity(0.2),
+                                labelStyle: TextStyle(
+                                  color: Colors.grey[800],
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  side: BorderSide(
+                                    color: Colors.grey[300]!,
+                                  ),
+                                ),
                               ),
                             );
                           },
-                        );
-                      },
-                    );
-                  }
+                        ),
+                      ),
+                      const SizedBox(height: 25),
+                      if (_filteredRecipes.isEmpty)
+                        const Center(
+                          child: Column(
+                            children: [
+                              Icon(Icons.search_off, size: 60, color: Colors.grey),
+                              SizedBox(height: 15),
+                              Text(
+                                'No recipes found',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      else
+                        LayoutBuilder(
+                          builder: (context, constraints) {
+                            return GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 15,
+                                mainAxisSpacing: 15,
+                                childAspectRatio: constraints.maxWidth > 600 ? 0.85 : 0.75,
+                                mainAxisExtent: 280,
+                              ),
+                              itemCount: _filteredRecipes.length,
+                              itemBuilder: (context, index) {
+                                final recipe = _filteredRecipes[index];
+                                return RecipeCard(
+                                  recipe: recipe,
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => RecipeDetailScreen(recipe: recipe),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            );
+                          }
+                        ),
+                      const SizedBox(height: 20),
+                    ],
+                  ),
                 ),
-              const SizedBox(height: 30),
-            ],
-          ),
+              ),
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: CustomBottomNavBar(),
