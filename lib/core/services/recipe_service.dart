@@ -5,7 +5,7 @@ class RecipeService {
     return [
       Recipe(
         title: 'Lalapan Ayam Goreng',
-        username: 'Mr. Smith',
+        username: 'Leo Satria',
         time: '30 min',
         rating: '4.8',
         image: 'images/lalapan.jpg',
@@ -298,7 +298,7 @@ class RecipeService {
     ];
   }
 
-  static List<Recipe> getRecipesByCategory(String category) {
-    return getAllRecipes().where((recipe) => recipe.category == category).toList();
+    static List<Recipe> getRecipesByCategory(String category) {
+      return getAllRecipes().where((recipe) => recipe.category == category).toList();
+    }
   }
-}
