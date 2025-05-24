@@ -78,7 +78,7 @@ class RecipeCard extends StatelessWidget {
                       children: [
                         Flexible(
                           child: Text(
-                            '${recipe.username}',
+                            recipe.username,
                             style: TextStyle(
                               fontSize: 14,
                               color: Colors.grey[600],

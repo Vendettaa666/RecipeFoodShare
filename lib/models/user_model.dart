@@ -21,10 +21,26 @@ class User {
       name: map['name'] ?? '',
       email: map['email'] ?? '',
       role: map['role'] ?? 'user',
-      registeredAt: map['registeredAt'] != null 
-          ? DateTime.parse(map['registeredAt']) 
-          : null,
+      registeredAt: _parseDateTime(map['registeredAt']),
       points: map['points'] ?? 0,
     );
+  }
+  
+  // Helper method to parse different datetime formats
+  static DateTime? _parseDateTime(dynamic value) {
+    if (value == null) return null;
+    
+    if (value is DateTime) return value;
+    
+    if (value is String) {
+      try {
+        return DateTime.parse(value);
+      } catch (e) {
+        print('Error parsing date: $e');
+        return null;
+      }
+    }
+    
+    return null;
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../core/services/auth_service.dart';
 import '../../widgets/custom_textfield.dart';
 import '../../widgets/custom_button.dart';
-import '../admin/admin_home.dart';
+import '../admin/dashboard.dart';
 import '../user/screens/user_home.dart';
 import 'register_screen.dart';
 
@@ -20,30 +20,184 @@ class _LoginScreenState extends State<LoginScreen> {
   final _authService = AuthService();
   bool _isLoading = false;
   bool _obscurePassword = true;
+  String? _errorMessage;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  // Validasi email yang lebih sederhana
+  String? _validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your email';
+    }
+    
+    // Validasi dasar: harus ada @ atau minimal 3 karakter
+    if (value.length < 3) {
+      return 'Email too short';
+    }
+    
+    return null;
+  }
 
   Future<void> _login() async {
-    if (!_formKey.currentState!.validate()) return;
-
-    setState(() => _isLoading = true);
-    
-    final user = await _authService.login(
-      _emailController.text.trim(),
-      _passwordController.text.trim(),
-    );
-    
-    setState(() => _isLoading = false);
-
-    if (user != null) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (_) => user.role == 'admin' ? const AdminHome() : const HomeScreen(),
-        ),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login failed. Invalid credentials')),
-      );
+    if (!_formKey.currentState!.validate()) {
+      setState(() => _isLoading = false);
+      return;
     }
+    
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
+    
+    try {
+      final user = await _authService.login(
+        _emailController.text.trim(),
+        _passwordController.text.trim(),
+      );
+      
+      if (user != null) {
+        if (!mounted) return;
+        
+        // Route based on user role
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (_) => user.role == 'admin' 
+                ? const DashboardPage() 
+                : const HomeScreen(),
+          ),
+        );
+      } else {
+        setState(() {
+          _errorMessage = 'Login failed. Please check your email and password.';
+        });
+      }
+    } catch (e) {
+      setState(() {
+        if (e.toString().contains('Invalid login credentials')) {
+          _errorMessage = 'Invalid email or password. Please try again.';
+        } else if (e.toString().contains('Email not confirmed')) {
+          _handleEmailNotConfirmed();
+        } else if (e.toString().contains('invalid')) {
+          _errorMessage = 'Please use a valid email address (e.g., user@gmail.com).';
+        } else {
+          _errorMessage = 'An error occurred: ${e.toString().split(']').last}';
+        }
+        print('Login error: $e');
+      });
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
+  
+  // Handle "Email not confirmed" error by automatically confirming the email
+  Future<void> _handleEmailNotConfirmed() async {
+    setState(() {
+      _errorMessage = 'Confirming your email...';
+    });
+    
+    try {
+      final email = _emailController.text.trim();
+      final success = await _authService.confirmEmail(email);
+      
+      if (success) {
+        // Try to login again after confirming email
+        try {
+          final user = await _authService.login(
+            email,
+            _passwordController.text.trim(),
+          );
+          
+          if (user != null && mounted) {
+            // Route based on user role
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (_) => user.role == 'admin' 
+                    ? const DashboardPage() 
+                    : const HomeScreen(),
+              ),
+            );
+          } else if (mounted) {
+            setState(() {
+              _errorMessage = 'Email confirmed, but login failed. Please try again.';
+            });
+          }
+        } catch (loginError) {
+          if (mounted) {
+            setState(() {
+              _errorMessage = 'Login failed after email confirmation: ${loginError.toString().split(']').last}';
+            });
+          }
+        }
+      } else {
+        // Show a dialog with manual verification option
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+          _showManualVerificationDialog(email);
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _errorMessage = 'Error confirming email: ${e.toString().split(']').last}';
+          _isLoading = false;
+        });
+      }
+    }
+  }
+  
+  // Show dialog with manual verification options
+  void _showManualVerificationDialog(String email) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Email Verification Required'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                const Text('We couldn\'t automatically verify your email.'),
+                const SizedBox(height: 10),
+                const Text('Please try one of these options:'),
+                const SizedBox(height: 10),
+                const Text('1. Check your email inbox for a verification link'),
+                const SizedBox(height: 5),
+                const Text('2. Try again later'),
+                const SizedBox(height: 5),
+                const Text('3. Contact support if the problem persists'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Try Again'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _login();
+              },
+            ),
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                setState(() {
+                  _errorMessage = 'Please verify your email before logging in.';
+                });
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -99,7 +253,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           SizedBox(height: screenSize.height * 0.06),
                           Container(
-                            constraints: BoxConstraints(
+                            constraints: const BoxConstraints(
                               maxWidth: 500,
                             ),
                             decoration: BoxDecoration(
@@ -117,22 +271,37 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: EdgeInsets.all(screenSize.width * 0.06),
                               child: Column(
                                 children: [
+                                  if (_errorMessage != null)
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 16.0),
+                                      child: Container(
+                                        padding: const EdgeInsets.all(12),
+                                        decoration: BoxDecoration(
+                                          color: Colors.red.shade50,
+                                          borderRadius: BorderRadius.circular(8),
+                                          border: Border.all(color: Colors.red.shade200),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            const Icon(Icons.error_outline, color: Colors.red),
+                                            const SizedBox(width: 8),
+                                            Expanded(
+                                              child: Text(
+                                                _errorMessage!,
+                                                style: const TextStyle(color: Colors.red),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   CustomTextField(
                                     controller: _emailController,
                                     label: 'Email Address',
                                     hintText: 'Enter your email',
                                     prefixIcon: Icon(Icons.email_outlined, color: Colors.orange.shade800),
                                     keyboardType: TextInputType.emailAddress,
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter your email';
-                                      }
-                                      if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                                          .hasMatch(value)) {
-                                        return 'Please enter a valid email';
-                                      }
-                                      return null;
-                                    },
+                                    validator: _validateEmail,
                                   ),
                                   SizedBox(height: screenSize.height * 0.025),
                                   CustomTextField(

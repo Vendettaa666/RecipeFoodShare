@@ -16,7 +16,7 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   String _searchQuery = '';
   List<Recipe> _filteredRecipes = [];
-  List<String> _categories = ['All', 'Indonesian', 'Western', 'Breakfast'];
+  final List<String> _categories = ['All', 'Indonesian', 'Western', 'Breakfast'];
 
   @override
   void initState() {
